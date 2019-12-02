@@ -1,6 +1,5 @@
 import React from 'react';
 import './Car.css';
-import Link from '../../shared/Link/Link';
 
 function Car({ title, imageUrl, brand, seller, fuel, year, price }) {
     return <div className="listing">
@@ -17,13 +16,13 @@ function Car({ title, imageUrl, brand, seller, fuel, year, price }) {
             <div id="data-buttons">
                 <ul>
                     <li className="action">
-                        <Link href="#" className="button-carDetails">Details</Link>
+                        <a href="/details" className="button-carDetails">Details</a>
                     </li>
                     <li className="action">
-                        <Link href="#" className="button-carDetails">Edit</Link>
+                        <a href="/edit" className="button-carDetails">Edit</a>
                     </li>
                     <li className="action">
-                        <Link href="#" className="button-carDetails">Delete</Link>
+                        <a href="/delete" className="button-carDetails">Delete</a>
                     </li>
                 </ul>
             </div>

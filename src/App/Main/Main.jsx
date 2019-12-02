@@ -1,6 +1,5 @@
 import React from 'react';
 import './Main.css';
-import Link from '../../shared/Link/Link';
 
 function Main() {
     return <div id="main">
@@ -9,8 +8,8 @@ function Main() {
             <img src="/finance-car.png" alt="carIntro" />
             <h2>Login or register to check out our listings or to make one</h2>
             <div id="button-div">
-                <Link className="button" url="#">Login</Link>
-                <Link className="button" url="#">Register</Link>
+                <a className="button" href="/login">Login</a>
+                <a className="button" href="/register">Register</a>
             </div>
         </div>
     </div>
