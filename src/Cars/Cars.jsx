@@ -1,7 +1,7 @@
 import React from 'react';
 import './Cars.css';
 import Car from './Car/Car';
-// import carServise from '../service/car-service';
+import carServise from '../service/car-service';
 
 class Cars extends React.Component {
     constructor(props) {
@@ -12,22 +12,22 @@ class Cars extends React.Component {
     }
 
     componentDidMount() {
-        // carServise.load().then(cars => {
-        //     this.setState({ cars });
-        // })
+        carServise.load(null, this.props.limit).then(cars => {
+            this.setState({ cars });
+        })
     }
 
     render() {
-        // const { cars } = this.state;
+        const { cars } = this.state;
 
         return <div id="car-listings">
             <h1>Car Listings</h1>
-            {/* {cars ? 
+            {cars ? 
                 <div id="listings">
-                    {cars.map((car) => <Car title={car.title} imageUrl={car.imageUrl} brand={car.brand} seller={car.seller} fuel={car.fuel} year={car.year} price={car.price}></Car>)}
+                    {cars.map((car) => <Car key={car._id} title={car.title} imageUrl={car.imageUrl} brand={car.brand} author={car.author.username} fuel={car.fuel} year={car.year} price={car.price}></Car>)}
                 </div> : <div>Loading...</div>
-            } */}
-            <div id="listings">  
+            }
+            {/* <div id="listings"> 
                 <Car
                     title="Audi a3 много запазено"
                     imageUrl="https://i.imgur.com/drIOsYl.jpg"
@@ -64,7 +64,7 @@ class Cars extends React.Component {
                     year="1998"
                     price="2500 $"
                 />
-            </div>
+            </div> */}
         </div>
     }
 }
