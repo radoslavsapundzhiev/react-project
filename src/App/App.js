@@ -34,41 +34,43 @@ class App extends React.Component {
     super(props);
     const cookies = parseCookeis();
     const isLogged = !!cookies['x-auth-token'];
-    this.state = { isLogged };
+    const username = cookies['username'];
+    this.state = { isLogged, username };
   }
 
   logout = (history) => {
     userService.logout().then(() => {
-      this.setState({ isLogged: false });
+      this.setState({ isLogged: false, username: null });
+      document.cookie = {};
       history.push('/');
       return null;
     });
   }
 
   login = (history, data) => {
-    userService.login(data).then(() => {
-      this.setState({ isLogged: true });
+    userService.login(data).then((user) => {
+      this.setState({ isLogged: true, username: JSON.parse(user).username });
       history.push('/');
-    });
+    }).catch();
   }
   render(){
-    const { isLogged } = this.state;
+    const { isLogged, username } = this.state;
 
     return (
       <BrowserRouter>
         <div className="App">
           <div id="container">
-            <Navigation isLogged={isLogged}/>
+            <Navigation isLogged={isLogged} username={username}/>
             <Switch>
               <Route path="/" exact Redirect to="/">
-                <Main />
+                <Main isLogged={isLogged} />
               </Route>
               <Route path="/all">
                 <Cars />
               </Route>
               <Route path="/register" render={render(Register, { isLogged })}/>
-              <Route path="/login" render={render(Login, { isLogged, login: this.login })}/>
-              <Route path="/logout" render={render(Logout, { isLogged, logout: this.logout })} />
+              <Route path="/login" render={render(Login, { isLogged, login: this.login})}/>
+              <Route path="/logout" render={render(Logout, { isLogged, logout: this.logout})} />
               <Route path="/profile">
                 <React.Suspense fallback={<Loader isLoading={true} />}>
                   <Profile></Profile>
