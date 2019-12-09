@@ -15,7 +15,6 @@ class Register extends React.Component {
     if (!!errors) { return; }
     const data = this.props.getFormState();
     userService.register(data).then(() => {
-        console.log(this.props.history);
         this.props.history.push('/login');
     });
   };
