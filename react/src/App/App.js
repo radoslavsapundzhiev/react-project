@@ -68,7 +68,7 @@ class App extends React.Component {
                 <Main isLogged={isLogged} />
               </Route>
               <Route path="/all">
-                <Cars />
+                <Cars isLogged={isLogged} />
               </Route>
               <Route path="/register" render={render(Register, { isLogged })}/>
               <Route path="/login" render={render(Login, { isLogged, login: this.login})}/>

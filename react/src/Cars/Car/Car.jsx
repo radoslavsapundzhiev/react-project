@@ -1,7 +1,7 @@
 import React from 'react';
 import './Car.css';
 
-function Car({ title, imageUrl, brand, author, fuel, year, price }) {
+function Car({ title, imageUrl, brand, author, fuel, year, price, isLogged }) {
     return <div className="listing">
         <p>{title}</p>
         <img src={imageUrl} alt="carImage" />
@@ -19,10 +19,10 @@ function Car({ title, imageUrl, brand, author, fuel, year, price }) {
                         <a href="/details" className="button-carDetails">Details</a>
                     </li>
                     <li className="action">
-                        <a href="/edit" className="button-carDetails">Edit</a>
+                        {isLogged && <a href="/edit" className="button-carDetails">Edit</a>}
                     </li>
                     <li className="action">
-                        <a href="/delete" className="button-carDetails">Delete</a>
+                        {isLogged && <a href="/delete" className="button-carDetails">Delete</a>}
                     </li>
                 </ul>
             </div>
