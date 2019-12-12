@@ -16,7 +16,7 @@ class Register extends React.Component {
     const data = this.props.getFormState();
     userService.register(data).then(() => {
         this.props.history.push('/login');
-    });
+    }).catch(console.error);
   };
 
   getFirstControlError = name => {
@@ -65,20 +65,20 @@ const initialFormState = {
     rePassword: ''
   };
 
-  function equalTo(ref, msg) {
-    return yup.mixed().test({
-      name: 'equalTo',
-      exclusive: false,
-      message: msg || '${path} must be the same as ${reference}',
-      params: {
-        reference: ref.path,
-      },
-      test: function(value) {
-        return value === this.resolve(ref);
-      },
-    });
-  }
-  yup.addMethod(yup.string, 'equalTo', equalTo);
+  // function equalTo(ref: any, msg: any) {
+  //   return yup.mixed().test({
+  //     name: 'equalTo',
+  //     exclusive: false,
+  //     message: msg || '${path} must be the same as ${reference}',
+  //     params: {
+  //       reference: ref.path,
+  //     },
+  //     test: function(value) {
+  //       return value === this.resolve(ref);
+  //     },
+  //   });
+  // }
+  // yup.addMethod(yup.string, 'equalTo', equalTo);
   
   const schema = yup.object({
     username: yup.string('Username shoud be a string')
@@ -90,7 +90,9 @@ const initialFormState = {
       .min(6, 'Password must be more than 6 chars'),
   
     rePassword: yup.string('Password must be a string')
-        .equalTo(yup.ref('password'), 'Passwords must match')
+        // .equalTo(yup.ref('password'), 'Passwords must match')
+        // .required('Password is required')
+        .oneOf([yup.ref('password'), null])
         .required('Password is required')
   });
   

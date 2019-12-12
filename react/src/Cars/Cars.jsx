@@ -1,7 +1,7 @@
 import React from 'react';
 import './Cars.css';
 import Car from './Car/Car';
-import carServise from '../service/car-service';
+import carService from '../service/car-service';
 
 class Cars extends React.Component {
     constructor(props) {
@@ -12,7 +12,7 @@ class Cars extends React.Component {
     }
 
     componentDidMount() {
-        carServise.load(null, this.props.limit).then(cars => {
+        carService.load(null, this.props.limit).then(cars => {
             this.setState({ cars });
         })
     }
@@ -24,7 +24,7 @@ class Cars extends React.Component {
             <h1>Car Listings</h1>
             {cars ? 
                 <div id="listings">
-                    {cars.map((car) => <Car key={car._id} isLogged={this.props.isLogged} title={car.title} imageUrl={car.imageUrl} brand={car.brand} author={car.author.username} fuel={car.fuel} year={car.year} price={car.price}></Car>)}
+                    {cars.map((car) => <Car key={car._id} id={car._id} isLogged={this.props.isLogged} title={car.title} imageUrl={car.imageUrl} brand={car.brand} author={car.author.username} fuel={car.fuel} year={car.year} price={car.price}></Car>)}
                 </div> : <div>Loading...</div>
             }
             {/* <div id="listings"> 

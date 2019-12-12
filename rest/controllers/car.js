@@ -1,18 +1,38 @@
 const models = require('../models');
 
 module.exports = {
-  get: (req, res, next) => {
-    const limit = +req.query.limit;
-    if (limit) {
-      models.Car.find().populate('author').sort({ _id: -1 }).limit(limit)
-        .then((cars) => res.send(cars))
-        .catch(next);
-      return;
-    }
-    models.Car.find().populate('author')
-      .then((cars) => res.send(cars))
-      .catch(next);
-  },
+  get: {
+      all: (req, res, next) => {
+        const limit = +req.query.limit;
+        if (limit) {
+          models.Car.find().populate('author').sort({ _id: -1 }).limit(limit)
+            .then((cars) => res.send(cars))
+            .catch(next);
+          return;
+        }
+        models.Car.find().populate('author')
+          .then((cars) => res.send(cars))
+          .catch(next);
+      },
+
+      detail: (req, res, next) => {
+        const { id } = req.params;
+
+        models.Car
+          .findById(id)
+          .then((car) => res.send(car))
+          .catch(next);
+      },
+
+      myCars: (req, res, next) => {
+        models.Car
+          .find({ author: req.user._id })
+          .populate('author')
+          .then((cars) => res.send(cars))
+          .catch(next);
+      }
+
+},
 
   post: (req, res, next) => {
     const { title, description, brand, model, year, imageUrl, fuel, price, author } = req.body;

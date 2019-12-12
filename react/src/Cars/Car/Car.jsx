@@ -1,7 +1,8 @@
 import React from 'react';
 import './Car.css';
 
-function Car({ title, imageUrl, brand, author, fuel, year, price, isLogged }) {
+function Car({ id, title, imageUrl, brand, author, fuel, year, price, isLogged }) {
+    let url = `detail/${id}`;
     return <div className="listing">
         <p>{title}</p>
         <img src={imageUrl} alt="carImage" />
@@ -16,7 +17,7 @@ function Car({ title, imageUrl, brand, author, fuel, year, price, isLogged }) {
             <div id="data-buttons">
                 <ul>
                     <li className="action">
-                        <a href="/details" className="button-carDetails">Details</a>
+                        <a href={url} className="button-carDetails">Details</a>
                     </li>
                     <li className="action">
                         {isLogged && <a href="/edit" className="button-carDetails">Edit</a>}
