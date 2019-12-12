@@ -8,7 +8,8 @@ export default class Detail extends React.Component {
         super(props);
 
         this.state = {
-            car: null
+            car: null,
+            isAuthor: false
         };
     }
     
@@ -16,19 +17,19 @@ export default class Detail extends React.Component {
     componentDidMount() {
         const id = this.props.match.params.id;
         carService.detail(id).then(car => {
-            this.setState({ car });
+            let isAuthor = car.author.username === this.props.username ? true : false;
+            this.setState({ car, isAuthor });
         });
     }
 
     render() {
-        const { car } = this.state;
-        let isLogged = this.props.isLogged;
+        const { car, isAuthor } = this.state;
         return car && <div className="listing-details">
             <div className="my-listing-details">
 
                 <p id="auto-title">{car.title}</p>
 
-                <img src={car.imageUrl}></img>
+                <img src={car.imageUrl} alt=""></img>
 
                 <div className="listing-props">
                     <h2>Brand: {car.brand}</h2>
@@ -39,8 +40,8 @@ export default class Detail extends React.Component {
                 </div>
 
                 <div className="listings-buttons">
-                    {isLogged && <a href="/edit" className="button-list">Edit</a>}
-                    {isLogged && <a href="/delete" className="button-list">Delete</a>}
+                    {isAuthor && <a href="/edit" className="button-list">Edit</a>}
+                    {isAuthor && <a href="/delete" className="button-list">Delete</a>}
                     <a href="/all" className="button-list">Back</a>
                 </div>
                 <p id="description-title">Description:</p>

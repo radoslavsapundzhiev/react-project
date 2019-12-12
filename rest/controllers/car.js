@@ -20,6 +20,7 @@ module.exports = {
 
         models.Car
           .findById(id)
+          .populate('author')
           .then((car) => res.send(car))
           .catch(next);
       },

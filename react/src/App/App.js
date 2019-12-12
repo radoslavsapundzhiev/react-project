@@ -70,15 +70,15 @@ class App extends React.Component {
                 <Main isLogged={isLogged} />
               </Route>
               <Route path="/all">
-                <Cars isLogged={isLogged} />
+                <Cars isLogged={isLogged} username={username}/>
               </Route>
               <Route path="/myCars">
-                <MyCars isLogged={isLogged}/>
+                <MyCars isLogged={isLogged} username={username}/>
               </Route>
               <Route path="/register" render={render(Register, { isLogged })}/>
               <Route path="/login" render={render(Login, { isLogged, login: this.login})}/>
               <Route path="/logout" render={render(Logout, { isLogged, logout: this.logout})} />
-              <Route path="/detail/:id" render={render(Detail, { isLogged })} />
+              <Route path="/detail/:id" render={render(Detail, { username })} />
               <ProtectedRoute isLogged={isLogged} redirectTo="/" path="/create" exact render={render(CreateCar, { isLogged })} />}/>
               {/* <ProtectedRoute isLogged={isLogged} redirectTo="/" path="/myCars" exact render={render(MyCars, { isLogged })} />}/> */}
               <Route path="/profile">

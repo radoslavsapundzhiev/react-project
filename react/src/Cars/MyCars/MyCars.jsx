@@ -21,10 +21,10 @@ class MyCars extends React.Component{
         const { cars } = this.state;
         console.log(this.props.isLogged);
         return <div id="car-listings">
-                    <h1>Car Listings</h1>
+                    <h1>My Car Listings</h1>
                     {cars ? 
                         <div id="listings">
-                            {cars.map((car) => <Car key={car._id} id={car._id} isLogged={this.props.isLogged} title={car.title} imageUrl={car.imageUrl} brand={car.brand} author={car.author.username} fuel={car.fuel} year={car.year} price={car.price}></Car>)}
+                            {cars.map((car) => <Car key={car._id} id={car._id} isAuthor={car.author.username === this.props.username ? true : false} title={car.title} imageUrl={car.imageUrl} brand={car.brand} author={car.author.username} fuel={car.fuel} year={car.year} price={car.price}></Car>)}
                         </div> : <div>Loading...</div>
                     }
                 </div>
