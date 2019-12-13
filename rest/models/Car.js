@@ -27,12 +27,12 @@ const carSchema = new Schema({
     year: {
         type: mongoose.SchemaTypes.Number,
         required: true,
-        validate: {
-            validator: function(v){
-                return v.toString().length === 4;
-            },
-            message:  'The year must be only 4 chars long!'
-        }
+        // validate: {
+        //     validator: function(v){
+        //         return v.toString().length === 4;
+        //     },
+        //     message:  'The year must be only 4 chars long!'
+        // }
     },
     imageUrl: {
         type: mongoose.SchemaTypes.String,
@@ -53,7 +53,7 @@ const carSchema = new Schema({
         type: mongoose.SchemaTypes.Number,
         required: true,
         max: [1000000, 'The maximum price is 1000000$!'],
-        min: [1000, 'The minimum price is 1000000$!']
+        min: [1000, 'The minimum price is 1000$!']
     },
     author: {
         type: mongoose.SchemaTypes.ObjectId,
