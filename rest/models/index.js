@@ -2,9 +2,10 @@ const User = require('./User');
 const Origami = require('./Origami');
 const TokenBlacklist = require('./TokenBlacklist');
 const Car = require('./Car');
+const Comment = require('./Comment');
 
 // User
-//     .create({ username: 'Pesho', password: '123456'})
+//     .create({ username: 'Rado', password: '123456'})
 //     .then((user) => {
 //         Car.create({
 //             title: "Audi a3 много запазено",
@@ -16,7 +17,28 @@ const Car = require('./Car');
 //             year: 1988,
 //             price: 2500,
 //             author: user._id
-//         }).catch(console.error);
+//         })
+//         .then((car) => {
+//             Promise.all([
+//                 User.updateOne({ _id: user._id }, { $push: { posts: car } }),
+
+//                 Comment.create({ title: "nice title1", description: "1super coolrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", author: user._id, car: car._id })
+//                 .then((comment) => 
+//                     Promise.all([
+//                         User.updateOne({ _id: user._id }, { $push: { comments: comment } }),
+//                         Car.updateOne({ _id: car._id }, { $push: { comments: comment }})
+//                     ])),
+
+//                 Comment.create({ title: "nice title1", description: "1super coolrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", author: user._id, car: car._id })
+//                 .then((comment) => 
+//                     Promise.all([
+//                         User.updateOne({ _id: user._id }, { $push: { comments: comment } }),
+//                         Car.updateOne({ _id: car._id }, { $push: { comments: comment }})
+//                     ]))
+//                 .catch(console.error)
+//             ])
+//         })
+//         .catch(console.error);
 
 //         Car.create({
 //             title: "Audi a3 много запазено",
@@ -59,5 +81,6 @@ module.exports = {
     User,
     Origami,
     Car,
+    Comment,
     TokenBlacklist
 };

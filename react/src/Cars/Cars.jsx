@@ -27,44 +27,6 @@ class Cars extends React.Component {
                     {cars.map((car) => <Car key={car._id} id={car._id} isAuthor={car.author.username === this.props.username ? true : false} isLogged={this.props.isLogged} title={car.title} imageUrl={car.imageUrl} brand={car.brand} author={car.author.username} fuel={car.fuel} year={car.year} price={car.price}></Car>)}
                 </div> : <div>Loading...</div>
             }
-            {/* <div id="listings"> 
-                <Car
-                    title="Audi a3 много запазено"
-                    imageUrl="https://i.imgur.com/drIOsYl.jpg"
-                    brand="Audi"
-                    seller="kunio"
-                    fuel="Gasoline"
-                    year="1998"
-                    price="2500 $"
-                />
-                <Car
-                    title="Audi a3 много запазено"
-                    imageUrl="https://i.imgur.com/drIOsYl.jpg"
-                    brand="Audi"
-                    seller="kunio"
-                    fuel="Gasoline"
-                    year="1998"
-                    price="2500 $"
-                />
-                <Car
-                    title="Audi a3 много запазено"
-                    imageUrl="https://i.imgur.com/drIOsYl.jpg"
-                    brand="Audi"
-                    seller="kunio"
-                    fuel="Gasoline"
-                    year="1998"
-                    price="2500 $"
-                />
-                <Car
-                    title="Audi a3 много запазено"
-                    imageUrl="https://i.imgur.com/drIOsYl.jpg"
-                    brand="Audi"
-                    seller="kunio"
-                    fuel="Gasoline"
-                    year="1998"
-                    price="2500 $"
-                />
-            </div> */}
         </div>
     }
 }

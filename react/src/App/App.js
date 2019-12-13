@@ -12,6 +12,7 @@ import NotFound from '../NotFound/NotFound';
 import Register from '../Register/Register';
 import Detail from '../Cars/Detail/Detail';
 import MyCars from '../Cars/MyCars/MyCars';
+import CreateComment from '../Comments/CreateComment/CreateComment';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import ProtectedRoute from '../shared/ProtectedRoute/ProtectedRoute';
 import userService from '../service/user-service';
@@ -53,7 +54,7 @@ class App extends React.Component {
 
   login = (history, data) => {
     userService.login(data).then((user) => {
-      this.setState({ isLogged: true, username: JSON.parse(user).username });
+      this.setState({ isLogged: true, username: user ? JSON.parse(user).username : "" });
       history.push('/');
     }).catch();
   }
@@ -78,8 +79,9 @@ class App extends React.Component {
               <Route path="/register" render={render(Register, { isLogged })}/>
               <Route path="/login" render={render(Login, { isLogged, login: this.login})}/>
               <Route path="/logout" render={render(Logout, { isLogged, logout: this.logout})} />
-              <Route path="/detail/:id" render={render(Detail, { username })} />
+              <Route path="/detail/:id" exact render={render(Detail, { username, isLogged })} />
               <ProtectedRoute isLogged={isLogged} redirectTo="/" path="/create" exact render={render(CreateCar, { isLogged })} />}/>
+              <ProtectedRoute isLogged={isLogged} redirectTo="/detail/:id" path="/detail/:id/comment/create" exact render={render(CreateComment, { isLogged })} />}/>
               {/* <ProtectedRoute isLogged={isLogged} redirectTo="/" path="/myCars" exact render={render(MyCars, { isLogged })} />}/> */}
               <Route path="/profile">
                 <React.Suspense fallback={<Loader isLoading={true} />}>

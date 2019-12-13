@@ -58,7 +58,8 @@ const carSchema = new Schema({
     author: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'User'
-    }
+    },
+    comments: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Comment' }]
 });
 
 module.exports = new Model('Car', carSchema);

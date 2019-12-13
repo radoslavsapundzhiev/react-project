@@ -4,8 +4,17 @@ const carService = {
     },
 
     detail: function(id){
-      return fetch(`http://localhost:9999/api/car/detail/${id}`).then(res => res.json());
+      const apiRequestDetail = fetch(`http://localhost:9999/api/car/detail/${id}`).then(res => res.json());
+      const apiRequestComments = fetch(`http://localhost:9999/api/comment/${id}/all`).then(res => res.json());
+      const combinedData = {"apiRequestDetail": {}, "apiRequestComments": {}};
+      return Promise.all([apiRequestDetail, apiRequestComments]).then(function(values){
+          combinedData["apiRequestDetail"] = values[0];
+          combinedData["apiRequestComments"] = values[1];
+          return combinedData;
+      });  
     },
+
+    // fetch(`http://localhost:9999/api/car/detail/${id}`).then(res => res.json());
 
     myCars: function(){
       return fetch(`http://localhost:9999/api/car/myCars`, {
@@ -18,7 +27,7 @@ const carService = {
       }).then(res => res.json());
     },
     create: function(data) {
-        return fetch(`http://localhost:9999/api/car/`, {
+        return fetch(`http://localhost:9999/api/car/create`, {
           method: 'POST',
           headers: {
             'Content-type': 'application/json'

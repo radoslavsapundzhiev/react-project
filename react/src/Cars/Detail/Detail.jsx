@@ -1,7 +1,7 @@
 import React from 'react';
-
 import './Detail.css';
 import carService from '../../service/car-service';
+import Comments from '../../Comments/Comments';
 
 export default class Detail extends React.Component {
     constructor(props){
@@ -9,6 +9,7 @@ export default class Detail extends React.Component {
 
         this.state = {
             car: null,
+            comments: null,
             isAuthor: false
         };
     }
@@ -16,14 +17,18 @@ export default class Detail extends React.Component {
 
     componentDidMount() {
         const id = this.props.match.params.id;
-        carService.detail(id).then(car => {
+        carService.detail(id).then(combinedData => {
+            const car = combinedData["apiRequestDetail"];
+            const comments = combinedData["apiRequestComments"];
             let isAuthor = car.author.username === this.props.username ? true : false;
-            this.setState({ car, isAuthor });
+            this.setState({ car, comments, isAuthor });
         });
     }
 
     render() {
-        const { car, isAuthor } = this.state;
+        const { car, isAuthor, comments } = this.state;
+        const isLogged = this.props.isLogged;
+        const url = car ? `/detail/${car._id}/comment/create` : "";
         return car && <div className="listing-details">
             <div className="my-listing-details">
 
@@ -42,11 +47,13 @@ export default class Detail extends React.Component {
                 <div className="listings-buttons">
                     {isAuthor && <a href="/edit" className="button-list">Edit</a>}
                     {isAuthor && <a href="/delete" className="button-list">Delete</a>}
+                    {!isAuthor && isLogged && <a href={url} className="button-list">Comment</a>}
                     <a href="/all" className="button-list">Back</a>
                 </div>
                 <p id="description-title">Description:</p>
-                <p id="description-para">{car.description}</p>
+                <p id="description-para">{car.description}</p>              
             </div>
+            <Comments comments={comments}/>
         </div>
     }
 

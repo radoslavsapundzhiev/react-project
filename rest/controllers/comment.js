@@ -5,13 +5,13 @@ module.exports = {
       all: (req, res, next) => {
         const limit = +req.query.limit;
         if (limit) {
-          models.Car.find().populate('author').sort({ _id: -1 }).limit(limit)
-            .then((cars) => res.send(cars))
+          models.Comment.findById({ car: req.params.id }).populate('author').populate('car').sort({ date: -1 }).limit(limit)
+            .then((comments) => res.send(comments))
             .catch(next);
           return;
         }
-        models.Car.find().populate('author')
-          .then((cars) => res.send(cars))
+        models.Comment.find({ car: req.params.id }).populate('author').populate('car').sort({ date: -1 })
+          .then((comments) => res.send(comments))
           .catch(next);
       },
 
@@ -37,18 +37,20 @@ module.exports = {
 
   post: {
       create: (req, res, next) => {
-        const { title, description, brand, model, year, imageUrl, fuel, price} = req.body;
+        const { title, description, date } = req.body;
         const { _id } = req.user;
+        const carId = req.params.id;
 
-        models.Car.create({ title, description, brand, model, year, imageUrl, fuel, price, author: _id })
-          .then((createdCar) => {
+        models.Comment.create({ title, description, car: carId, author: _id })
+          .then((createdComment) => {
             return Promise.all([
-              models.User.updateOne({ _id: req.user._id }, { $push: { posts: createdCar } }),
-              models.Car.findOne({ _id: createdCar._id })
+              models.User.updateOne({ _id: req.user }, { $push: { comments: createdComment } }),
+              models.Car.updateOne({ _id: carId }, { $push: { comments: createdComment } }),
+              models.Comment.findOne({ _id: createdComment._id })
             ]);
           })
-          .then(([modifiedObj, carObj]) => {
-            res.send(carObj);
+          .then(([modifiedUser, modifiedCar, commentObj]) => {
+            res.send(commentObj);
           })
           .catch((err) => {
             const errorMessages = Object.entries(err.errors).map(tuple => {

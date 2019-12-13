@@ -19,5 +19,7 @@ module.exports = (app) => {
 
     app.use('/api/car', router.car);
 
+    app.use('/api/comment', router.comment);
+
     app.use('*', (req, res, next) => res.send('<h1> Something went wrong. Try again. :thumbsup: </h1>'))
 };

@@ -29,7 +29,9 @@ const userSchema = new Schema({
         required: [true, 'Password is required!']
     },
 
-    posts: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Car' }]
+    posts: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Car' }],
+
+    comments: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Comment' }]
 
 });
 
