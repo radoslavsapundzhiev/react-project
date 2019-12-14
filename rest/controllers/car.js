@@ -57,27 +57,26 @@ module.exports = {
             res.send(errorMessages);
           });
       },
+
       edit: (req, res, next) => {
         const id = req.params.id;
         const { title, description, brand, model, year, imageUrl, fuel, price} = req.body;
         models.Car.updateOne({ _id: id }, { title, description, brand, model, year, imageUrl, fuel, price})
           .then((updatedCar) => res.send(updatedCar))
           .catch(next);
+      },
+
+      delete: (req, res, next) => {
+        const id = req.params.id;
+        // models.Car.deleteOne({ _id: id })
+        //   .then((removedCar) => res.send(removedCar))
+        //   .catch(next)
+        models.Car.findByIdAndRemove(id)
+          .then((removedCar) => {
+            req.user.posts = req.user.posts.filter(car => car.toString() !== removedCar._id.toString());
+            return models.User.findByIdAndUpdate({ _id: req.user._id }, req.user);
+          }).then(user => res.send(user))
+          .catch(next);
       }
   }
-
-//   put: (req, res, next) => {
-//     const id = req.params.id;
-//     const { description } = req.body;
-//     models.Origami.updateOne({ _id: id }, { description })
-//       .then((updatedOrigami) => res.send(updatedOrigami))
-//       .catch(next)
-//   },
-
-//   delete: (req, res, next) => {
-//     const id = req.params.id;
-//     models.Origami.deleteOne({ _id: id })
-//       .then((removedOrigami) => res.send(removedOrigami))
-//       .catch(next)
-//   }
 };

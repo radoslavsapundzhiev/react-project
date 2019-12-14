@@ -13,6 +13,7 @@ import Register from '../Register/Register';
 import Detail from '../Cars/Detail/Detail';
 import MyCars from '../Cars/MyCars/MyCars';
 import EditCar from '../Cars/EditCar/EditCar';
+import DeleteCar from '../Cars/DeleteCar/DeleteCar';
 import CreateComment from '../Comments/CreateComment/CreateComment';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ProtectedRoute from '../shared/ProtectedRoute/ProtectedRoute';
@@ -83,6 +84,7 @@ class App extends React.Component {
               <Route path="/detail/:id" exact render={render(Detail, { username, isLogged })} />
               <ProtectedRoute isLogged={isLogged} redirectTo="/" path="/create" exact render={render(CreateCar, { isLogged })} />}/>
               <ProtectedRoute isLogged={isLogged} redirectTo="/" path="/edit/:id" exact render={render(EditCar, { isLogged })} />}/>
+              <ProtectedRoute isLogged={isLogged} redirectTo="/" path="/delete/:id" exact render={render(DeleteCar, { isLogged })} />}/>
               <ProtectedRoute isLogged={isLogged} redirectTo="/detail/:id" path="/detail/:id/comment/create" exact render={render(CreateComment, { isLogged })} />}/>
               {/* <ProtectedRoute isLogged={isLogged} redirectTo="/" path="/myCars" exact render={render(MyCars, { isLogged })} />}/> */}
               <Route path="/profile">

@@ -15,24 +15,6 @@ module.exports = {
           .catch(next);
       },
 
-      detail: (req, res, next) => {
-        const { id } = req.params;
-
-        models.Car
-          .findById(id)
-          .populate('author')
-          .then((car) => res.send(car))
-          .catch(next);
-      },
-
-      myCars: (req, res, next) => {
-        models.Car
-          .find({ author: req.user._id })
-          .populate('author')
-          .then((cars) => res.send(cars))
-          .catch(next);
-      }
-
   },
 
   post: {
@@ -60,19 +42,4 @@ module.exports = {
           });
       },
   }
-
-//   put: (req, res, next) => {
-//     const id = req.params.id;
-//     const { description } = req.body;
-//     models.Origami.updateOne({ _id: id }, { description })
-//       .then((updatedOrigami) => res.send(updatedOrigami))
-//       .catch(next)
-//   },
-
-//   delete: (req, res, next) => {
-//     const id = req.params.id;
-//     models.Origami.deleteOne({ _id: id })
-//       .then((removedOrigami) => res.send(removedOrigami))
-//       .catch(next)
-//   }
 };

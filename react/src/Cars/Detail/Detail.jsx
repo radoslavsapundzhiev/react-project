@@ -30,6 +30,7 @@ export default class Detail extends React.Component {
         const isLogged = this.props.isLogged;
         const url = car ? `/detail/${car._id}/comment/create` : "";
         const editCarUrl = car ? `/edit/${car._id}` : "";
+        const deleteCarUrl = car ? `/delete/${car._id}` : "";
         return car && <div className="listing-details">
             <div className="my-listing-details">
 
@@ -47,7 +48,7 @@ export default class Detail extends React.Component {
 
                 <div className="listings-buttons">
                     {isAuthor && <a href={editCarUrl} className="button-list">Edit</a>}
-                    {isAuthor && <a href="/delete" className="button-list">Delete</a>}
+                    {isAuthor && <a href={deleteCarUrl} className="button-list">Delete</a>}
                     {!isAuthor && isLogged && <a href={url} className="button-list">Comment</a>}
                     <a href="/all" className="button-list">Back</a>
                 </div>

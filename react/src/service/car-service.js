@@ -46,6 +46,16 @@ const carService = {
       }).then(res => res.json());
   },
 
+    delete: function(id) {
+    return fetch(`http://localhost:9999/api/car/delete/${id}`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        credentials: 'include'
+      }).then(res => res.json());
+},
+
 };
 
 export default carService;

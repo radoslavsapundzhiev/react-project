@@ -4,6 +4,7 @@ import './Car.css';
 function Car({ id, title, imageUrl, brand, author, fuel, year, price, isLogged, isAuthor }) {
     const url = `detail/${id}`;
     const editCarUrl = `/edit/${id}`;
+    const deleteCarUrl = `/delete/${id}`;
     return <div className="listing">
         <p>{title}</p>
         <img src={imageUrl} alt="carImage" />
@@ -24,7 +25,7 @@ function Car({ id, title, imageUrl, brand, author, fuel, year, price, isLogged, 
                         {isAuthor && <a href={editCarUrl} className="button-carDetails">Edit</a>}
                     </li>
                     <li className="action">
-                        {isAuthor && <a href="/delete" className="button-carDetails">Delete</a>}
+                        {isAuthor && <a href={deleteCarUrl} className="button-carDetails">Delete</a>}
                     </li>
                 </ul>
             </div>
