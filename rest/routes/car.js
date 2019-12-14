@@ -7,7 +7,7 @@ router.get('/detail/:id', controllers.car.get.detail);
 router.get('/myCars', auth(), controllers.car.get.myCars);
 
 router.post('/create', auth(), controllers.car.post.create);
-
+router.post('/edit/:id', auth(), controllers.car.post.edit);
 
 // router.put('/:id', auth(), controllers.car.put);
 

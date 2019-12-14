@@ -29,7 +29,7 @@ class Login extends React.Component{
                 <input placeholder="Enter Password" type="password" onChange={this.passwordChangeHandler}/>
                 <button type="button"  onClick={this.submitHandler} className="registerbtn">Login</button>
 
-                <div class="container signin">
+                <div className="container signin">
                     <p>Dont have an account?
                         <a href="/register">Sign up</a>.</p>
                 </div>

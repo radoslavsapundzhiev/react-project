@@ -25,8 +25,18 @@ const userService = {
         method: 'POST',
         credentials: 'include'
       }).then(res => res.text());
+    },
+
+    profile: function(){
+      return fetch(`http://localhost:9999/api/user/detail`, {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          'Accept': 'application/json' 
+        },
+        credentials: 'include'
+      }).then(res => res.json());
     }
-  
   };
   
   export default userService;

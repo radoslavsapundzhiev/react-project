@@ -12,8 +12,9 @@ import NotFound from '../NotFound/NotFound';
 import Register from '../Register/Register';
 import Detail from '../Cars/Detail/Detail';
 import MyCars from '../Cars/MyCars/MyCars';
+import EditCar from '../Cars/EditCar/EditCar';
 import CreateComment from '../Comments/CreateComment/CreateComment';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ProtectedRoute from '../shared/ProtectedRoute/ProtectedRoute';
 import userService from '../service/user-service';
 
@@ -81,11 +82,12 @@ class App extends React.Component {
               <Route path="/logout" render={render(Logout, { isLogged, logout: this.logout})} />
               <Route path="/detail/:id" exact render={render(Detail, { username, isLogged })} />
               <ProtectedRoute isLogged={isLogged} redirectTo="/" path="/create" exact render={render(CreateCar, { isLogged })} />}/>
+              <ProtectedRoute isLogged={isLogged} redirectTo="/" path="/edit/:id" exact render={render(EditCar, { isLogged })} />}/>
               <ProtectedRoute isLogged={isLogged} redirectTo="/detail/:id" path="/detail/:id/comment/create" exact render={render(CreateComment, { isLogged })} />}/>
               {/* <ProtectedRoute isLogged={isLogged} redirectTo="/" path="/myCars" exact render={render(MyCars, { isLogged })} />}/> */}
               <Route path="/profile">
                 <React.Suspense fallback={<Loader isLoading={true} />}>
-                  <Profile></Profile>
+                  <Profile username={username} ></Profile>
                 </React.Suspense>
               </Route>
               <Route path="*">

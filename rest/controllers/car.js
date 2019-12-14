@@ -31,7 +31,7 @@ module.exports = {
           .populate('author')
           .then((cars) => res.send(cars))
           .catch(next);
-      }
+      },
 
   },
 
@@ -57,6 +57,13 @@ module.exports = {
             res.send(errorMessages);
           });
       },
+      edit: (req, res, next) => {
+        const id = req.params.id;
+        const { title, description, brand, model, year, imageUrl, fuel, price} = req.body;
+        models.Car.updateOne({ _id: id }, { title, description, brand, model, year, imageUrl, fuel, price})
+          .then((updatedCar) => res.send(updatedCar))
+          .catch(next);
+      }
   }
 
 //   put: (req, res, next) => {

@@ -19,7 +19,6 @@ class MyCars extends React.Component{
 
     render(){
         const { cars } = this.state;
-        console.log(this.props.isLogged);
         return <div id="car-listings">
                     <h1>My Car Listings</h1>
                     {cars ? 
