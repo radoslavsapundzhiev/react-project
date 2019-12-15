@@ -55,7 +55,9 @@ export default class Detail extends React.Component {
                 <p id="description-title">Description:</p>
                 <p id="description-para">{car.description}</p>              
             </div>
-            <Comments comments={comments}/>
+            <div className="comments">
+                <Comments comments={comments}/>
+            </div>
         </div>
     }
 

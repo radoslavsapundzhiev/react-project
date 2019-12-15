@@ -131,3 +131,12 @@ h3 {
 #description-para {
     width: 39.8em;
 }
+
+.comments{
+    display: flex;
+    flex-direction: column;
+}
+
+.comments>.my-listing-details-comment{
+    text-align: center;
+}

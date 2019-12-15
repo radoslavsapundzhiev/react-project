@@ -25,7 +25,6 @@ class Profile extends React.Component{
             <h2>{username}</h2>
             <h3>Posts: {posts}</h3>
             <h3>Comments: {comments}</h3>
-            <a id="deleteUserButton" href="/profile">DELETE USER!</a>
       </div>
     }
 }
